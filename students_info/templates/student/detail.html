@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ student }}</title>
+</head>
+<body>
+<h1>{{ student }}</h1>
+
+<a href="{% url 'student-update' student.pk %}"></a>
+
+<form action="{% url 'student-delete' student.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="delete">
+</form>
+{% if student.picture %}
+    <img src="student.picture.url">
+{% endif %}
+
+<h1> Scores: </h1>
+<ul>
+    {% for score in student.scores.all %}
+        <li>
+        {{ score }}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
